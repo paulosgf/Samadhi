@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Samadhi</string>
     <string name="samadhi">Samadhi</string>
+    <string name="data_from_sqlite">Data from database</string>
+    <string name="enter_message">Enter message</string>
+    <string name="message">Message</string>
+    <string name="update">update</string>
+    <string name="delete">delete</string>
 </resources>
