@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context=".MainActivity"
-    android:background="@drawable/gradient" >
+    android:background="@drawable/gradient">
 
     <TextView
         android:id="@+id/textview"
@@ -14,50 +16,50 @@
         android:text="@string/samadhi"
         android:textSize="50sp"
         android:textColor="#570417"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="85dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
     <TextView
+        android:id="@+id/msg_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="650dp"
+        android:text="Enter a message to display"
         android:textColor="#570417"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"
-        android:text="Enter a message to display" />
+        android:textSize="20sp" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
         android:id="@+id/etmsg"
+        android:layout_width="371dp"
+        android:layout_height="37dp"
+        android:layout_above="@+id/msg_text_view"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="636dp"
         android:background="#FFFCD7"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:hint="Enter message"
-        android:layout_marginStart="20dp" />
+        android:hint="Enter message" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/btnstore"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Store"
-        android:layout_marginStart="20dp" />
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnget"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Get all messages from database"
-        android:layout_marginStart="20dp" />
+        android:layout_above="@+id/etmsg"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="56dp"
+        android:layout_marginBottom="470dp"
+        android:text="Store" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etmsg"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="66dp"
+        android:layout_marginBottom="469dp"
+        android:text="Get messages" />
+
+</RelativeLayout>
