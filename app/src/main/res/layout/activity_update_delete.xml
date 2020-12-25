@@ -13,14 +13,15 @@
         android:text="@string/message"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textColor="#000"
+        android:textColor="@color/clear_yellow"
         android:textSize="20sp"
         android:layout_marginStart="10dp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/etmsg"
-        android:background="#570417"
+        android:background="@color/clear_yellow"
+        android:textColor="@color/black_wine"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
