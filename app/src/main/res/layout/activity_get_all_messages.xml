@@ -10,18 +10,20 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        android:textColor="#000"
+        android:textColor="@color/clear_yellow"
         android:text="@string/data_from_sqlite"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lv">
-
-
+        android:id="@+id/lv"
+        android:gravity="center"
+        android:textColor="@color/black_wine"
+        android:background="@color/clear_yellow">
     </ListView>
 
 </LinearLayout>

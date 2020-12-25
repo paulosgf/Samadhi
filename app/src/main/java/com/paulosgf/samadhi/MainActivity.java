@@ -15,11 +15,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Build;
 
+import android.database.sqlite.SQLiteDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnStore, btnGetall, btnStartAlarm, btnCancelAlarm;
     private EditText etmsg;
     private DatabaseHelper databaseHelper;
+    private SQLiteDatabase db;
 
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseHelper.addMessage(etmsg.getText().toString());
+                databaseHelper.insertMessage(etmsg.getText().toString());
                 etmsg.setText("");
                 Toast.makeText(MainActivity.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
             }

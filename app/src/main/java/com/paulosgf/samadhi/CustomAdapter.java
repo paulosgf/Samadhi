@@ -51,7 +51,7 @@ public class CustomAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.tvmsg.setText("Message: "+MessageModelArrayList.get(position).getMessage());
+        holder.tvmsg.setText(MessageModelArrayList.get(position).getMessage());
 
         return convertView;
     }

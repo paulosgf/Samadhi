@@ -35,6 +35,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public long insertMessage(String message) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String count = "SELECT count(*) FROM " + TABLE_MESSAGES;
+        Cursor mcursor = db.rawQuery(count, null);
+        ContentValues values = new ContentValues();
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if (icount>0) {
+            db.execSQL("DROP TABLE '" + TABLE_MESSAGES + "'");
+            db.execSQL(CREATE_TABLE_MESSAGES);
+            values.put(KEY_MESSAGE, message);
+            long status = db.insert(TABLE_MESSAGES, null, values);
+            mcursor.close();;
+            return status;
+        } else {
+            values.put(KEY_MESSAGE, message);
+            long status = db.insert(TABLE_MESSAGES, null, values);
+            mcursor.close();
+            return status;
+        }
+    }
+
     public long addMessage(String message) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Creating content values
