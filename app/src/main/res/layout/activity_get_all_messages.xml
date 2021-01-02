@@ -7,16 +7,6 @@
     android:orientation="vertical"
     tools:context="com.paulosgf.samadhi.GetAllMessagesActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="150dp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:textColor="@color/clear_yellow"
-        android:text="@string/data_from_sqlite"/>
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

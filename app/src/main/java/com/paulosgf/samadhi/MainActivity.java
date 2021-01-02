@@ -2,6 +2,8 @@ package com.paulosgf.samadhi;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -12,19 +14,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
-import android.os.Build;
-
 import android.database.sqlite.SQLiteDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnStore, btnGetall, btnStartAlarm, btnCancelAlarm;
+    private Button btnStore, btnStartAlarm, btnCancelAlarm;
+    private Button btnGetall;
     private EditText etmsg;
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
 
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
+    BroadcastReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,41 +63,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // alarm service logic
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Intent alarmIntent = new Intent(this, MyBroadCastReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
-
-        btnStartAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAlarm();
-            }
-        });
-
-        btnCancelAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelAlarm();
-            }
-        });
+        configureReceiver();
     }
 
-    // alarm methods
-    private void startAlarm() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
-        } else {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
-        }
+    // alarm logic
+    private void configureReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.paulosgf.samadhi");
+        receiver = new MyReceiver();
+        registerReceiver(receiver, filter);
     }
 
-    private void cancelAlarm() {
-        alarmManager.cancel(pendingIntent);
-        Toast.makeText(getApplicationContext(), "Alarm Cancelled", Toast.LENGTH_LONG).show();
+    public void broadcastIntent(View view)
+    {
+        Intent intent = new Intent();
+        intent.setAction("com.paulosgf.samadhi");
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        sendBroadcast(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 }
