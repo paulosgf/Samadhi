@@ -26,16 +26,17 @@ public class GetAllMessagesActivity extends AppCompatActivity {
 
         MessageModelArrayList = databaseHelper.getAllMsgs();
 
-        customAdapter = new CustomAdapter(this,MessageModelArrayList);
+        customAdapter = new CustomAdapter(this, MessageModelArrayList);
         listView.setAdapter(customAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(GetAllMessagesActivity.this,UpdateDeleteActivity.class);
-                intent.putExtra("user",MessageModelArrayList.get(position));
+                Intent intent = new Intent(GetAllMessagesActivity.this, UpdateDeleteActivity.class);
+                intent.putExtra("user", MessageModelArrayList.get(position));
                 startActivity(intent);
             }
         });
+
     }
 }
