@@ -13,6 +13,8 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
 
+        Intent i = new Intent(context, GetAllMessagesActivity.class);
+        context.startActivity(i);
         Toast.makeText(context, "Broadcast Intent Detected.",
                 Toast.LENGTH_LONG).show();
     }

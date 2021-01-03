@@ -3,6 +3,7 @@ package com.paulosgf.samadhi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnStore, btnStartAlarm, btnCancelAlarm;
-    private Button btnGetall;
     private EditText etmsg;
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnStartAlarm = findViewById(R.id.btnStartAlarm);
-        btnCancelAlarm = findViewById(R.id.btnCancelAlarm);
-
         // database logic
         TextView textView = findViewById(R.id.textview);
         Typeface typeface = ResourcesCompat.getFont(
@@ -43,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
         btnStore = (Button) findViewById(R.id.btnstore);
-        btnGetall = (Button) findViewById(R.id.btnget);
         etmsg = (EditText) findViewById(R.id.etmsg);
 
         btnStore.setOnClickListener(new View.OnClickListener() {
@@ -55,11 +51,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnGetall.setOnClickListener(new View.OnClickListener() {
+        // alarm logic
+        btnStartAlarm = findViewById(R.id.btnStartAlarm);
+        btnCancelAlarm = findViewById(R.id.btnCancelAlarm);
+
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent alarmIntent = new Intent(this, MyReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+
+        btnCancelAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,GetAllMessagesActivity.class);
-                startActivity(intent);
+                alarmManager.cancel(pendingIntent);
+                Toast.makeText(getApplicationContext(), "Alarm Cancelled", Toast.LENGTH_LONG).show();
             }
         });
 
